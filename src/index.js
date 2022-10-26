@@ -27,7 +27,7 @@ async function main(){
     const commands = [
         {
             name: 'tutorialhelp',
-            description: 'Help Tutorial Comman',
+            description: 'Help Tutorial Command',
         },
     ];
 
@@ -46,6 +46,6 @@ async function main(){
 main();
 
 //logs messages
-// client.on('messageCreate', (message) => {
-//     console.log(message.content);
-// })
+client.on('messageCreate', (message) => {
+    console.log(message.content);
+})
