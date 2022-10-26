@@ -8,6 +8,7 @@ const TOKEN = process.env.botToken;
 const CLIENT_ID = process.env.clientId;
 const GUILD_ID = process.env.guildId;
 
+
 const client = new Client({ 
     intents: [
         GatewayIntentBits.Guilds,
@@ -22,12 +23,22 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
 client.login(TOKEN);
 client.on('ready', () => {console.log('bot has logged in');});
 
+client.on('interactionCreate', (interaction) => {
+
+    if (interaction.isChatInputCommand()){
+        console.log('Hello, World');
+         interaction.reply({ content: '<@414941719398842368>',
+         content: '<@414941719398842368>'
+        });     
+    }
+});
+
 async function main(){
 
     const commands = [
         {
-            name: 'tutorialhelp',
-            description: 'Help Tutorial Command',
+            name: 'annoyxeg',
+            description: 'annoys xegativ',
         },
     ];
 
