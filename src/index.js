@@ -1,14 +1,16 @@
-import { config } from 'dotenv';
+import { config } from 'dotenv'; // import config from .env
 import { Client, CommandInteractionOptionResolver, GatewayIntentBits, Routes } from 'discord.js';
-import { REST } from 'discord.js';
+import { REST } from 'discord.js'; // REST API used for grabbing data from site
 
 config();
 
+// process included by default
 const TOKEN = process.env.botToken;
 const CLIENT_ID = process.env.clientId;
 const GUILD_ID = process.env.guildId;
 
 
+// Intents allows ability to choose which events to import?
 const client = new Client({ 
     intents: [
         GatewayIntentBits.Guilds,
@@ -17,11 +19,14 @@ const client = new Client({
     ],
 });
 
+// retrieve token
 const rest = new REST({ version: '10' }).setToken(TOKEN);
 
-
+// bot login w tokin
 client.login(TOKEN);
 client.on('ready', () => {console.log('bot has logged in');});
+
+
 
 client.on('interactionCreate', (interaction) => {
 
@@ -33,6 +38,7 @@ client.on('interactionCreate', (interaction) => {
     }
 });
 
+// async so that code runs alongside other code 
 async function main(){
 
     const commands = [
