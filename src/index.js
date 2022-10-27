@@ -5,6 +5,7 @@ import { REST } from 'discord.js'; // REST API used for grabbing data from site
 config(); // loads data from .env
 
 // process included by default
+//takes values from env file
 const TOKEN = process.env.botToken;
 const CLIENT_ID = process.env.clientId;
 const GUILD_ID = process.env.guildId;
