@@ -2,7 +2,7 @@ import { config } from 'dotenv'; // import config from .env
 import { Client, CommandInteractionOptionResolver, GatewayIntentBits, Routes } from 'discord.js';
 import { REST } from 'discord.js'; // REST API used for grabbing data from site
 
-config();
+config(); // loads data from .env
 
 // process included by default
 const TOKEN = process.env.botToken;
@@ -47,7 +47,6 @@ async function main(){
             description: 'annoys xegativ',
         },
     ];
-
 
 
     try {
