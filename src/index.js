@@ -25,7 +25,11 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
 
 // bot login w tokin
 client.login(TOKEN);
-client.on('ready', () => {console.log('bot has logged in');});
+client.on('ready', () => {
+    console.log('bot has logged in');
+
+    client.user.setActivity("Fuck you all.");
+});
 
 
 
@@ -38,6 +42,23 @@ client.on('interactionCreate', (interaction) => {
         });     
     }
 });
+
+client.on('messageCreate', (message) => {
+    if (message.content.includes("test"))
+    {
+        message.channel.send(`${message.author} said bad word.`);
+
+        //var user_id = message.channel.send(client.users.cache.find(u => u.tag === message.author.tag).id)
+        //message.author.send('the fuck you say to me?');
+    }
+})
+
+client.on('messageDelete', (message) => {
+    message.channel.send(`${message.author} be deletin messages.`);
+
+})
+
+
 
 // async so that code runs alongside other code 
 async function main(){
