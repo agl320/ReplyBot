@@ -1,10 +1,10 @@
 import { config } from 'dotenv'; // import config from .env
 import { Client, CommandInteractionOptionResolver, GatewayIntentBits, Routes } from 'discord.js';
 import { REST } from 'discord.js'; // REST API used for grabbing data from site
-const {REST} = require("@discordjs/rest")
-const{ Routes } = require("@discord-api-type/v9")
-const fs = require("fs")
-const { Player } = require("discord-player")
+// const {REST} = require("@discordjs/rest")
+// const{ Routes } = require("@discord-api-type/v9")
+// const fs = require("fs")
+// const { Player } = require("discord-player")
 
 const LOAD_SLASH = process.argv[2] == "load"
 
@@ -50,7 +50,7 @@ for(const file of slashFiles){
 }
 
 if (LOAD_SLASH){
-    const rest = new REST({version: "9"}).setToken(TOKEN)
+    const rest = new REST({ version: '10' }).setToken(TOKEN);
     console.log("Deploying slash commands")
     rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {body: commands})
     .then(() => {
@@ -63,6 +63,23 @@ if (LOAD_SLASH){
             process.exit(1)
         }
     })
+}
+else{
+    client.on("ready", () => {
+        console.log('Logged in as ${client.user.tag}')
+    })
+    client.log("interactionCreate", (interaction) => {
+        async function handleCommand(){
+            if (!interaction.isCommand()) return
+            const slashcmd = client.slashcommands.get(interation.commandName)
+            if(!slashcmd) interaction.replay("Not a valid slash command")
+
+            await interaction.deferReply()
+            await slashcmd.run({client, interaction})
+        }
+        handleCommand()
+    })
+
 }
 
 // retrieve token
